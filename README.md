@@ -1,4 +1,4 @@
-![logo](LFBPlus/icons/lfbPlusIcon-48.png)
+![logo](firefox/icons/lfbPlusIcon-48.png)
 ## LFB+
 v1.5
 
