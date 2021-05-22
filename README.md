@@ -1,6 +1,6 @@
 ![logo](firefox/icons/lfbPlusIcon-48.png)
 ## LFB+
-![license](https://img.shields.io/badge/version-1.6-blue) [![license](https://img.shields.io/badge/license-CC%20BY--NC%204.0-green)](https://creativecommons.org/licenses/by-nc/4.0/)
+![version](https://img.shields.io/badge/version-1.6-blue) [![license](https://img.shields.io/badge/license-CC%20BY--NC%204.0-green)](https://creativecommons.org/licenses/by-nc/4.0/) [![twitter](https://img.shields.io/badge/@MrDoubleH-grey?style=flat&logo=twitter)](https://twitter.com/MrDoubleH)
 
 Verbessert die Darstellung der Seiten zur Suche und die der Einzeldarstellung einer Fortbildung auf [https://lfbo.kultus-bw.de/lfb](https://lfbo.kultus-bw.de/lfb) - umgangsprachlich auch LFB genannt.
 
