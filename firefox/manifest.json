@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "LFB+",
-  "version": "1.5",
+  "version": "1.6",
   "author": "Harald Hentschel",
 
   "description": "Gets links ready for opening in new tab and sets title accordingly. It shows an icon according to meldeschluss-date, too. Adds a link to itself including the LFB-ID to take a better reference to it. Setting up favourites in bookmarks is now much easier because title of page is changed to current appointment and LFB-ID.",
