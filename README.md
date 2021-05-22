@@ -1,6 +1,6 @@
 ![logo](firefox/icons/lfbPlusIcon-48.png)
 ## LFB+
-v1.5
+![license](https://img.shields.io/badge/version-5.0-blue) [![license](https://img.shields.io/badge/license-CC%20BY--NC%204.0-green)](https://creativecommons.org/licenses/by-nc/4.0/)
 
 Verbessert die Darstellung der Seiten zur Suche und die der Einzeldarstellung einer Fortbildung auf [https://lfbo.kultus-bw.de/lfb](https://lfbo.kultus-bw.de/lfb) - umgangsprachlich auch LFB genannt.
 
