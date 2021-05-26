@@ -2,12 +2,15 @@
 // @name           LFB+
 // @namespace      LFB+
 // @author         Harald Hentschel
+// @twitterURL     https://www.twitter.com/mrdoubleh
 // @description    Gets links ready for opening in new tab and sets title accordingly. It shows an icon according to meldeschluss-date, too. Adds a link to itself including the LFB-ID to take a better reference to it. Setting up favourites in bookmarks is now much easier because title of page is changed to current appointment and LFB-ID.
-// @version        1.5
+// @version        1.6
 // @include        *lfbo.kultus-bw*
-
-
+// @downloadURL    https://codeberg.org/MrDoubleH/LFBPlus/raw/commit/e5a8ddfadc84374d116eb6da777d9978a01313de/greaseMonkey/lfbPlus.js
+// @license        https://creativecommons.org/licenses/by-nc/4.0/
 // ==/UserScript==
+
+
 // ===== / start of script / =====
 // get elements
 var header_logo_left_ele = document.getElementsByClassName("logo col-1 col-md-2 text-left");

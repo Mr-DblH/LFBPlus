@@ -24,10 +24,8 @@ Diese Addons helfen dabei, ein JavaScript lokal ausführen zu können. Das Scrip
 #### Screenshots
 ![logo](firefox/screenshots/lfbPlus_Screenshot1_title.jpg)
 
-___
 
 ![logo](firefox/screenshots/lfbPlus_Screenshot2_single.jpg)
 
-___
 
 ![logo](firefox/screenshots/lfbPlus_Screenshot1_title.jpg)
