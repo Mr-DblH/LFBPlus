@@ -6,7 +6,6 @@
 // @description    Gets links ready for opening in new tab and sets title accordingly. It shows an icon according to meldeschluss-date, too. Adds a link to itself including the LFB-ID to take a better reference to it. Setting up favourites in bookmarks is now much easier because title of page is changed to current appointment and LFB-ID.
 // @version        2.0
 // @include        *lfbo.kultus-bw*
-// @downloadURL    https://codeberg.org/MrDoubleH/LFBPlus/raw/commit/e5a8ddfadc84374d116eb6da777d9978a01313de/greaseMonkey/lfbPlus.js
 // @license        https://creativecommons.org/licenses/by-nc/4.0/
 // ==/UserScript==
 
