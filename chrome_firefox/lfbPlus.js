@@ -4,13 +4,16 @@
 // @author         Harald Hentschel
 // @twitterURL     https://www.twitter.com/mrdoubleh
 // @description    Gets links ready for opening in new tab and sets title accordingly. It shows an icon according to meldeschluss-date, too. Adds a link to itself including the LFB-ID to take a better reference to it. Setting up favourites in bookmarks is now much easier because title of page is changed to current appointment and LFB-ID.
-// @version        2.0
+// @version        2.1
 // @include        *lfbo.kultus-bw*
 // @license        https://creativecommons.org/licenses/by-nc/4.0/
 // ==/UserScript==
 
 
 // ===== / start of script / =====
+var title_str;
+var lfb_id;
+var lfb_id_copy;
 // get elements
 var header_logo_left_ele = document.getElementsByClassName("logo col-1 col-md-2 text-left");
 var header_logo_right_ele = document.getElementsByClassName("col-1 d-none d-md-block text-left");
@@ -38,7 +41,7 @@ var refreshInterval = setInterval(function() {
 
     for (var i=0; i<class_id_ele.length; i++){
       if (class_id_ele[i].textContent.trim().length != 5){
-        var lfb_id = class_id_ele[i].textContent.substring(0, 6);
+        lfb_id = class_id_ele[i].textContent.substring(0, 6);
         var lfb_id_and_more = class_id_ele[i].textContent.split(" - ");
         class_id_ele[i].innerHTML ='<a href=https://lfbo.kultus-bw.de/lfb/termine/' + lfb_id + ' target="_blank" style="color:#b70017;">' + lfb_id + " - " + lfb_id_and_more[1] +'</a>';
       }
@@ -46,8 +49,8 @@ var refreshInterval = setInterval(function() {
   } else {
     var tage_noch;
     var title_el = document.getElementsByClassName("title title-break");
-    var title_str = title_el[0].innerText.split("\n");
-    var ldb_id = title_str[1].substring(0,6);
+    title_str = title_el[0].innerText.split("\n");
+    lfb_id = title_str[1].substring(0,6);
     var yellow_boxed_title_el = document.getElementsByClassName("d-none d-sm-block");
 
     if (!title_el[0].innerHTML.includes('●')){
@@ -94,9 +97,7 @@ var refreshInterval = setInterval(function() {
       }
       title_el[0].childNodes[1].style.marginBottom = "10px";
 
-      // setup buttons to copy; setup element to be copied
-      link_to_self_ele = document.createElement('div');
-      link_to_self_ele.innerHTML = '<a href=' + window.location.href + ' target="_blank">LFB: ' + ldb_id + ": " + title_str[0] + '</a>'
+      lfb_id_copy = lfb_id;
       // buttons / buttongroup
       title_el[0].append(setButtonGroupURL());
       var horiLine = document.createElement('hr');
@@ -104,14 +105,12 @@ var refreshInterval = setInterval(function() {
       title_el[0].append(horiLine);
 
       // yellow top navi
-      yellow_boxed_title_el[0].innerHTML ='<h2>' + ldb_id + '</h2>';
+      yellow_boxed_title_el[0].innerHTML ='<h2>' + lfb_id + '</h2>';
       yellow_boxed_title_el[0].style.margin = "auto";
-      document.title = ldb_id + " | " + title_str[0];
+      document.title = lfb_id + " | " + title_str[0];
       }
     }
-  }
-, 1000);
-
+}, 500);
 
 
 
@@ -136,10 +135,12 @@ function setButtonGroupURL(){
   var btnCopyTitleWithURL = document.createElement('button');
   btnCopyTitleWithURL.classList.add('btn', 'btn-dark');
   btnCopyTitleWithURL.type = "button";
-  btnCopyTitleWithURL.textContent = "Kopieren mit Details";
+  btnCopyTitleWithURL.textContent = "Kopieren mit Titel";
   btnCopyTitleWithURL.style.fontSize = "small";
   btnCopyTitleWithURL.onclick = function() {
-    copyToClipboardWithStyle(link_to_self_ele, btnCopyTitleWithURL);
+    console.log(lfb_id);
+    var stringToCopy = title_str[0].replace('●', '').trim() + " (" + lfb_id_copy.trim() + "): " + window.location.href;
+    copyToClipboardPlain(stringToCopy, btnCopyTitleWithURL)
   }
 
   btnGroupURL.append(btnCopyURL);
@@ -162,75 +163,4 @@ function copyToClipboardPlain(stringToBeCopied, btnElement){
     btnElement.classList.add('btn-dark')
     btnElement.classList.remove('btn-primary');
   }, 300);
-}
-
-// copy to clipboard with specific styles
-// source: https://stackoverflow.com/questions/55440037/copy-rich-text-to-clipboard-with-styles-from-css-classes/55440331
-function copyToClipboardWithStyle(copyElement, btnElement) {
-  // array off all block level elements
-  var block_level_elements = ['P','H1', 'H2', 'H3', 'H4', 'H5', 'H6','OL', 'UL','DIV','FORM','HR','TABLE'];
-
-  //create new Element so we can change elments like we need
-  var newelment = document.createElement("div");
-
-  //copy target Element to the new Element
-  newelment.innerHTML = copyElement.innerHTML;
-
-  //hide new Element to body
-  newelment.style.opacity  = 0;
-  // add new Element to body
-  document.body.appendChild(newelment);
-
-  //get all element childs
-  var descendents = newelment.getElementsByTagName('*');
-
-  //loop in childs
-  for (var i = 0; i < descendents.length; ++i) {
-    //get defult Style
-      var style = window.getComputedStyle(descendents[i]);
-      var dis = style.getPropertyValue('display');
-      //get defult tag name
-      var tagname = descendents[i].tagName;
-
-    //---------------------------
-    //this part is little tricky
-    //---------------------------
-    //true : Element is a block level elements and css display is inline
-      if(dis.includes("inline") && block_level_elements.includes(tagname)){
-        //get all Element style include default style
-      var defultcss = document.defaultView.getComputedStyle(descendents[i], "").cssText;
-      //change Element tag from block level elements to inline level elements (span)
-      descendents[i].outerHTML = descendents[i].outerHTML.replace(new RegExp(tagname, "ig"),"span");      //todo: need to change RegExp to tag name only not inner text
-      //add all Element style include default style to new tag
-      descendents[i].style.cssText = defultcss;
-    }
-  }
-  //-----------------copy new Element--------------
-  var range, selection;
-
-  if (document.body.createTextRange)
-    {
-    range = document.body.createTextRange();
-    range.moveToElementText(newelment);
-    range.select();
-  } else if (window.getSelection)
-    {
-    selection = window.getSelection();
-    range = document.createRange();
-    range.selectNodeContents(newelment);
-    selection.removeAllRanges();
-    selection.addRange(range);
-  }
-  document.execCommand('copy');
-  window.getSelection().removeAllRanges();
-
-  // remove new Element from document
-  document.body.removeChild(newelment);
-
-  btnElement.classList.remove('btn-dark');
-  btnElement.classList.add('btn-primary');
-  setTimeout(function(){
-      btnElement.classList.add('btn-dark')
-      btnElement.classList.remove('btn-primary');
-    }, 300);
 }
