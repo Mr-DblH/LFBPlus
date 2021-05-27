@@ -1,4 +1,4 @@
-![logo](firefox/icons/lfbPlusIcon-48.png)
+![logo](chrome_firefox/icons/lfbPlusIcon-48.png)
 ## LFB+
 ![version](https://img.shields.io/badge/version-2.0-blue) [![license](https://img.shields.io/badge/license-CC%20BY--NC%204.0-green)](https://creativecommons.org/licenses/by-nc/4.0/) ![maintained](https://img.shields.io/badge/maintained%3F-yes-lightgreen?style=flat)
 [![twitter](https://img.shields.io/badge/@MrDoubleH-1DA1F2?style=flat&logo=twitter&logoColor=white)](https://twitter.com/MrDoubleH)
