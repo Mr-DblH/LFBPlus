@@ -4,37 +4,32 @@
 // @author         Harald Hentschel
 // @twitterURL     https://www.twitter.com/mrdoubleh
 // @description    Gets links ready for opening in new tab and sets title accordingly. It shows an icon according to meldeschluss-date, too. Adds a link to itself including the LFB-ID to take a better reference to it. Setting up favourites in bookmarks is now much easier because title of page is changed to current appointment and LFB-ID.
-// @version        2.1
+// @icon           https://codeberg.org/MrDoubleH/LFBPlus/raw/commit/63bc42a6e553bacbfd311c4a03c9d311010ff42b/chrome_firefox/icons/lfbPlusIcon-48.png
+// @version        2.3
 // @include        *lfbo.kultus-bw*
 // @license        https://creativecommons.org/licenses/by-nc/4.0/
-// ==/UserScript==
 
 
 // ==/UserScript==
 // ===== / start of script / =====
-var title_str;
-var lfb_id;
-var lfb_id_copy;
+var isDashboard, isSearch, isAktVeranst, isMeineBuchungen, isMitteilungen;
+var title_str, lfb_id, lfb_id_copy;
+var refreshInterval;
+var mitteilungen_lfb_id_showing;
+
 document.onreadystatechange = () => {
   if (document.readyState === 'complete') {
-    // get elements
+    // get rid of logo and unnecessary text
     var header_logo_left_ele = document.getElementsByClassName("logo col-1 col-md-2 text-left");
     var header_logo_right_ele = document.getElementsByClassName("col-1 d-none d-md-block text-left");
-
     header_logo_left_ele[0].style.visibility = "hidden";
     header_logo_right_ele[0].style.visibility = "hidden";
 
     var refreshInterval = setInterval(function() {
-      var isDashboard = window.location.href.toString().toLowerCase().includes("dashboard");
-      var isSearch = window.location.href.toString().toLowerCase().includes("suche");
-      var isAktVeranst = false;
-      try{
-        isAktVeranst = document.querySelectorAll("h4")[0].textContent.toLowerCase().includes("aktuelle veranstaltungen (")
-      } catch {
-        // console.log("no isAktVeranst");
-      }
+      // check website and set boolean values
+      check_kind_of_website();
 
-      if (isDashboard || isSearch || isAktVeranst){
+      if (isDashboard || isSearch || isAktVeranst || isMeineBuchungen){
         if (isDashboard || isAktVeranst){
           document.title = "LFB | dashboard";
         } else {
@@ -48,6 +43,29 @@ document.onreadystatechange = () => {
             var lfb_id_and_more = class_id_ele[i].textContent.split(" - ");
             class_id_ele[i].innerHTML ='<a href=https://lfbo.kultus-bw.de/lfb/termine/' + lfb_id + ' target="_blank" style="color:#b70017;">' + lfb_id + " - " + lfb_id_and_more[1] +'</a>';
           }
+        }
+      } else if (isMitteilungen){
+        document.title = "LFB | Mitteilungen";
+        try{
+          var h2_title_row_el = document.querySelectorAll("h2")[2]
+          var lfb_id_showing = document.querySelectorAll("h2")[2].textContent.replace("VT-Nr.:", "").trim().substring(0, 5);
+          if (lfb_id_showing != mitteilungen_lfb_id_showing){
+            mitteilungen_lfb_id_showing = lfb_id_showing;
+            try{
+              document.getElementById("link_is_setUp").remove();
+            } catch {
+              //
+            }
+
+            var link_ele = document.createElement('p');
+            link_ele.id = "link_is_setUp"
+            link_ele.innerHTML = '<a href=https://lfbo.kultus-bw.de/lfb/termine/' + lfb_id_showing + ' target="_blank" style="color:#b70017;">' + lfb_id_showing +'</a>';
+            var parent_el = h2_title_row_el.parentNode;
+            parent_el.insertBefore(link_ele, h2_title_row_el.nextSibling)
+          }
+
+        } catch {
+          //
         }
       } else {
         var tage_noch;
@@ -94,7 +112,13 @@ document.onreadystatechange = () => {
           } else if (tage_noch<0){
             title_el[0].innerHTML = "<h3><span style='color:red;'>● </span>" + title_str[0] + "</h3><p>Meldeschluss vorbei</p>";
           } else if (tage_noch<4){
-            title_el[0].innerHTML = "<h3><span style='color:#ff8800;'>● </span>" + title_str[0] + "</h3><p>" + tage_noch + " Tage bis zum Meldeschluss</p>";
+            if (tage_noch==0){
+              title_el[0].innerHTML = "<h3><span style='color:#ff8800;'>● </span>" + title_str[0] + "</h3><p> heute ist Meldeschluss</p>";
+            } else if (tage_noch==1){
+              title_el[0].innerHTML = "<h3><span style='color:#ff8800;'>● </span>" + title_str[0] + "</h3><p> morgen ist Meldeschluss</p>";
+            } else {
+              title_el[0].innerHTML = "<h3><span style='color:#ff8800;'>● </span>" + title_str[0] + "</h3><p>" + tage_noch + " Tage bis zum Meldeschluss</p>";
+            }
           }else {
             title_el[0].innerHTML = "<h3><span style='color:#00a00c;'>● </span>" + title_str[0] + "</h3><p>" + tage_noch + " Tage bis zum Meldeschluss</p>";
           }
@@ -102,7 +126,7 @@ document.onreadystatechange = () => {
 
           lfb_id_copy = lfb_id;
           // buttons / buttongroup
-          title_el[0].append(setButtonGroupURL());
+          title_el[0].append(setButtonGroupURL(meldeschluss_datum));
           var horiLine = document.createElement('hr');
           horiLine.classList.add('d-block', 'd-xs-none');
           title_el[0].append(horiLine);
@@ -111,8 +135,9 @@ document.onreadystatechange = () => {
           yellow_boxed_title_el[0].innerHTML ='<h2>' + lfb_id + '</h2>';
           yellow_boxed_title_el[0].style.margin = "auto";
           document.title = lfb_id + " | " + title_str[0];
-          }
+          //clearInterval(refreshInterval);
         }
+      }
     }, 500);
 
   }
@@ -120,8 +145,24 @@ document.onreadystatechange = () => {
 
 
 // == METHODS ==
+
+// check for kind of website to get the according code running
+function check_kind_of_website(){
+  isDashboard = window.location.href.toString().toLowerCase().includes("dashboard");
+  isSearch = window.location.href.toString().toLowerCase().includes("suche");
+  isMeineBuchungen = window.location.href.toString().toLowerCase().includes("meine_buchungen");
+  isMitteilungen = window.location.href.toString().toLowerCase().includes("lfb/mitteilungen");
+  isAktVeranst = false;
+  try{
+    isAktVeranst = document.querySelectorAll("h4")[0].textContent.toLowerCase().includes("aktuelle veranstaltungen (")
+  } catch {
+    // console.log("no isAktVeranst");
+  }
+}
+
+
 // copy buttons setzen
-function setButtonGroupURL(){
+function setButtonGroupURL(meldeschluss_datum){
   var btnGroupURL = document.createElement('div');
   btnGroupURL.classList.add('btn-group');
   btnGroupURL.setAttribute("role", "group");
@@ -139,11 +180,14 @@ function setButtonGroupURL(){
   var btnCopyTitleWithURL = document.createElement('button');
   btnCopyTitleWithURL.classList.add('btn', 'btn-dark');
   btnCopyTitleWithURL.type = "button";
-  btnCopyTitleWithURL.textContent = "Kopieren mit Titel";
+  btnCopyTitleWithURL.textContent = "Kopieren mit Details";
   btnCopyTitleWithURL.style.fontSize = "small";
   btnCopyTitleWithURL.onclick = function() {
-    console.log(lfb_id);
-    var stringToCopy = title_str[0].replace('●', '').trim() + " (" + lfb_id_copy.trim() + "): " + window.location.href;
+    if (meldeschluss_datum) {
+      var stringToCopy = meldeschluss_datum + ": " + title_str[0].replace('●', '').trim() + " (LFB:" + lfb_id_copy.trim() + "): " + window.location.href;
+    } else {
+      var stringToCopy = title_str[0].replace('●', '').trim() + " (LFB:" + lfb_id_copy.trim() + "): " + window.location.href;
+    }
     copyToClipboardPlain(stringToCopy, btnCopyTitleWithURL)
   }
 

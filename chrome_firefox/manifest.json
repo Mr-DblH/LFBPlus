@@ -1,14 +1,15 @@
 {
   "manifest_version": 2,
   "name": "LFB+",
-  "version": "2.1",
+  "version": "2.3",
   "author": "Harald Hentschel",
 
   "description": "Improves the presentation of the pages for searching and the presentation of a training.",
 
   "icons": {
     "48": "icons/lfbPlusIcon-48.png",
-    "96": "icons/lfbPlusIcon-96.png"
+    "96": "icons/lfbPlusIcon-96.png",
+    "128": "icons/lfbPlusIcon-128.png"
   },
 
   "permissions": [
