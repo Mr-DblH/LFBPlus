@@ -1,8 +1,8 @@
 ![logo](chrome_firefox/icons/lfbPlusIcon-48.png)
 # LFB+
-![version](https://img.shields.io/badge/version-2.3-blue) [![license](https://img.shields.io/badge/license-CC%20BY--NC%204.0-green)](https://creativecommons.org/licenses/by-nc/4.0/) ![maintained](https://img.shields.io/badge/maintained%3F-yes-lightgreen?style=flat)
+![version](https://img.shields.io/badge/version-2.4-blue) [![license](https://img.shields.io/badge/license-CC%20BY--NC%204.0-green)](https://creativecommons.org/licenses/by-nc/4.0/) ![maintained](https://img.shields.io/badge/maintained%3F-yes-lightgreen?style=flat)
 
-[![twitter](https://img.shields.io/badge/@MrDoubleH-1DA1F2?style=flat&logo=twitter&logoColor=white)](https://twitter.com/MrDoubleH)
+[![twitter](https://img.shields.io/badge/@MrDoubleH-1DA1F2?style=flat&logo=twitter&logoColor=white)](https://www.twitter.com/Mr_DblH)
 
 ## Inhalt
 Verbessert die Darstellung der Seiten zur Suche und die der Einzeldarstellung einer Fortbildung auf [https://lfbo.kultus-bw.de/lfb](https://lfbo.kultus-bw.de/lfb); umgangsprachlich auch LFB genannt.
@@ -17,7 +17,7 @@ Hinweis: Das ist ein privates Projekt; ich stehe bzgl. dieses Projektes _nicht_ 
 
 - **Seite einer einzelnen Fortbildung:**
 
-    Es werden anhand des Titels der Fortbildung und der LFB-Identfikationsnummer zwei Buttons eingefügt. Mit deren Hilfe können Details oder auch einfach die URL in die Zwischenablage kopiert werden. Damit ist das Kopieren und Weitersagen leichter und schneller. Das Datum der Fortbildung wird ab Version 2.3 auch in die Zwischenablage kopiert.
+    Es werden anhand des Titels der Fortbildung und der LFB-Identfikationsnummer zwei Buttons eingefügt. Mit deren Hilfe können Details oder auch einfach die URL in die Zwischenablage kopiert werden. Damit ist das Kopieren und Weitersagen leichter und schneller. Der Meldeschluss der Fortbildung wird ab Version 2.3 auch in die Zwischenablage kopiert. Ab Version 2.4 wird das Datum der Fortbildung ebenfalls kopiert. Der kopierte Text sieht wie folgend aus _"Mi DD.MM.YYYY - Do DD.MM.YYYY: Wirksam führen in Veränderungsprozessen (LFB: lfbID, Meldeschluss: DD.MM.YYYY): link_zur_lfb_FoBi_".
 
     Im Titel des Tabs steht statt _LFB_ nun die LFB-Identfikationsnummer gefolgt vom Titel der Fortbildung. Dadurch wird nicht nur die Organisation für Personen mit einem Hang zu vielen Tabs leichter, das Abspeichern in der Lesezeichenleiste wird auch übersichtlicher, da im Titel des Lesezeichens direkt der Titel der LFB-Fortbildung zu sehen ist.
 

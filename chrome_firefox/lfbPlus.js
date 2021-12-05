@@ -2,24 +2,24 @@
 // @name           LFB+
 // @namespace      LFB+
 // @author         Harald Hentschel
-// @twitterURL     https://www.twitter.com/mrdoubleh
+// @twitterURL     https://www.twitter.com/Mr_DblH
 // @description    Gets links ready for opening in new tab and sets title accordingly. It shows an icon according to meldeschluss-date, too. Adds a link to itself including the LFB-ID to take a better reference to it. Setting up favourites in bookmarks is now much easier because title of page is changed to current appointment and LFB-ID.
-// @icon           https://github.com/Mr-DoubleH/LFBPlus/blob/main/chrome_firefox/icons/lfbPlusIcon-48.png
-// @version        2.3
+// @icon           https://raw.githubusercontent.com/Mr-DblH/LFBPlus/main/chrome_firefox/icons/lfbPlusIcon-48.png
+// @version        2.4
 // @include        *lfbo.kultus-bw*
 // @license        https://creativecommons.org/licenses/by-nc/4.0/
-
-
 // ==/UserScript==
+
 // ===== / start of script / =====
 var isDashboard, isSearch, isAktVeranst, isMeineBuchungen, isMitteilungen;
 var title_str, lfb_id, lfb_id_copy;
+var date_of_event_start, date_of_event_end;
 var refreshInterval;
 var mitteilungen_lfb_id_showing;
-// get elements
+
+// get rid of logo and unnecessary text
 var header_logo_left_ele = document.getElementsByClassName("logo col-1 col-md-2 text-left");
 var header_logo_right_ele = document.getElementsByClassName("col-1 d-none d-md-block text-left");
-
 header_logo_left_ele[0].style.visibility = "hidden";
 header_logo_right_ele[0].style.visibility = "hidden";
 
@@ -92,7 +92,7 @@ var refreshInterval = setInterval(function() {
 
         var meldeschluss_datum = paragraphsOfContent_el[indexMeldeschluss].innerText.split("\n\n")[1];
         var meldeschluss_in_teilen = meldeschluss_datum.split('.')
-        var meldeschluss = new Date(meldeschluss_in_teilen[2], meldeschluss_in_teilen[1] - 1, meldeschluss_in_teilen[0]);
+        var meldeschluss = new Date(parseInt(meldeschluss_in_teilen[2]), parseInt(meldeschluss_in_teilen[1]) - 1, parseInt(meldeschluss_in_teilen[0]));
         var heute = new Date();
         heute = new Date(heute.getFullYear(), heute.getMonth(), heute.getDate());
         tage_noch = Math.floor((meldeschluss-heute)/(1000*60*60*24));
@@ -124,7 +124,7 @@ var refreshInterval = setInterval(function() {
 
       lfb_id_copy = lfb_id;
       // buttons / buttongroup
-      title_el[0].append(setButtonGroupURL(meldeschluss_datum));
+      title_el[0].append(setButtonGroupURL(meldeschluss));
       var horiLine = document.createElement('hr');
       horiLine.classList.add('d-block', 'd-xs-none');
       title_el[0].append(horiLine);
@@ -158,8 +158,23 @@ function check_kind_of_website(){
 
 
 
+
+
 // copy buttons setzen
 function setButtonGroupURL(meldeschluss_datum){
+  var date_of_event_str;
+  var date_of_event = document.getElementsByClassName("details-list-date");
+  date_of_event_start = date_of_event[0].innerText;
+  date_of_event_end = date_of_event[1].innerText;
+  if (date_of_event_start.includes(date_of_event_end)){
+    date_of_event_str = date_of_event_start;
+  } else {
+    date_of_event_str = date_of_event_start + " - " + date_of_event_end;
+  }
+  if (date_of_event_str !== ""){
+    date_of_event_str = date_of_event_str + ": ";
+  }
+
   var btnGroupURL = document.createElement('div');
   btnGroupURL.classList.add('btn-group');
   btnGroupURL.setAttribute("role", "group");
@@ -180,10 +195,10 @@ function setButtonGroupURL(meldeschluss_datum){
   btnCopyTitleWithURL.textContent = "Kopieren mit Details";
   btnCopyTitleWithURL.style.fontSize = "small";
   btnCopyTitleWithURL.onclick = function() {
-    if (meldeschluss_datum) {
-      var stringToCopy = meldeschluss_datum + ": " + title_str[0].replace('●', '').trim() + " (LFB:" + lfb_id_copy.trim() + "): " + window.location.href;
+    if (isNaN(meldeschluss_datum)) {
+      var stringToCopy = date_of_event_str + title_str[0].replace('●', '').trim() + " (LFB: " + lfb_id_copy.trim() + "): " + window.location.href;
     } else {
-      var stringToCopy = title_str[0].replace('●', '').trim() + " (LFB:" + lfb_id_copy.trim() + "): " + window.location.href;
+      var stringToCopy = date_of_event_str + title_str[0].replace('●', '').trim() + " (LFB: " + lfb_id_copy.trim() + ", Meldeschluss: " + meldeschluss_datum.getDate() + "." + (meldeschluss_datum.getMonth()+1) + "." + meldeschluss_datum.getFullYear() + "): " + window.location.href;
     }
     copyToClipboardPlain(stringToCopy, btnCopyTitleWithURL)
   }
@@ -209,3 +224,5 @@ function copyToClipboardPlain(stringToBeCopied, btnElement){
     btnElement.classList.remove('btn-primary');
   }, 300);
 }
+
+

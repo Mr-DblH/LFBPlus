@@ -1,10 +1,11 @@
 {
   "manifest_version": 2,
   "name": "LFB+",
-  "version": "2.3",
+  "version": "2.4",
   "author": "Harald Hentschel",
-
   "description": "Improves the presentation of the pages for searching and the presentation of a training.",
+  "homepage_url": "https://github.com/Mr-DblH/LFBPlus",
+
 
   "icons": {
     "48": "icons/lfbPlusIcon-48.png",
@@ -23,3 +24,4 @@
     }
   ]
 }
+
