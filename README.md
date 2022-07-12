@@ -31,6 +31,10 @@ Hinweis: Das ist ein privates Projekt; ich stehe bzgl. dieses Projektes _nicht_ 
 
     Anhand der Mitteilung wird eine LFB-Nummer ausgelesen und als Link zu dieser Fortbildung hinzugefügt. Da der Titel oft nicht in der Mitteilung vorhanden ist, findet man ohne erneute Suche den Titel leichter mit einem Klick auf den generierten Link. Dieser öffnet in einem neuen Tab die Fortbildungs-Einzelseite.
 
+- **Für eingeloggte Nutzer: Sind vorbereitende Unterlagen vorhanden?**
+
+    Verkettete Büroklammern bei einer Veranstaltung - hier bei muss man dafür angemeldet sein - deuten auf hinterlegte Unterlagen hin. Diese sind am Ende der Website gelistet und werden doch häufiger übersehen. Die Büroklammern werden im Titel zusätzlich angezeigt.
+
 
 ## Installationshinweise
 - für Firefox als Addon [hier](https://addons.mozilla.org/en-US/firefox/addon/lfb/) erhältlich; bitte ausschließlich von der offiziellen Mozilla-Addon-Seite laden.

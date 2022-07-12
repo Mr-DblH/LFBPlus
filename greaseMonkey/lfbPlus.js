@@ -5,7 +5,7 @@
 // @twitterURL     https://www.twitter.com/Mr_DblH
 // @description    Gets links ready for opening in new tab and sets title accordingly. It shows an icon according to meldeschluss-date, too. Adds a link to itself including the LFB-ID to take a better reference to it. Setting up favourites in bookmarks is now much easier because title of page is changed to current appointment and LFB-ID.
 // @icon           https://raw.githubusercontent.com/Mr-DblH/LFBPlus/main/chrome_firefox/icons/lfbPlusIcon-48.png
-// @version        2.4
+// @version        2.5
 // @include        *lfbo.kultus-bw*
 // @license        https://creativecommons.org/licenses/by-nc/4.0/
 // ==/UserScript==
@@ -76,6 +76,17 @@ document.onreadystatechange = () => {
         title_str = title_el[0].innerText.split("\n");
         lfb_id = title_str[1].substring(0,6);
         var yellow_boxed_title_el = document.getElementsByClassName("d-none d-sm-block");
+
+        var zusaetzliche_unterlagen;
+        try{
+          zusaetzliche_unterlagen = document.body.innerHTML.toLowerCase().includes('Vorbereitende Veranstaltungsunterlagen'.toLowerCase());
+          if (zusaetzliche_unterlagen){
+            title_str[0] = title_str[0] + " 🖇️";
+          }
+        } catch {
+          console.log("keine zusätzlichen Unterlagen gefunden")
+        }
+
 
         if (!title_el[0].innerHTML.includes('●')){
           try{
@@ -228,3 +239,5 @@ function copyToClipboardPlain(stringToBeCopied, btnElement){
     btnElement.classList.remove('btn-primary');
   }, 300);
 }
+
+
