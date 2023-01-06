@@ -2,7 +2,7 @@
 # LFB+
 ![version](https://img.shields.io/badge/version-2.5-blue) [![license](https://img.shields.io/badge/license-CC%20BY--NC%204.0-green)](https://creativecommons.org/licenses/by-nc/4.0/) ![maintained](https://img.shields.io/badge/maintained%3F-yes-lightgreen?style=flat)
 
-[![twitter](https://img.shields.io/badge/@MrDoubleH-1DA1F2?style=flat&logo=twitter&logoColor=white)](https://www.twitter.com/Mr_DblH)
+[![mastodon](https://img.shields.io/badge/@MrDoubleH-1DA1F2?style=flat&logo=Mastodon&logoColor=white)](https://mastodon.social/@MrDblH)
 
 ## Inhalt
 Verbessert die Darstellung der Seiten zur Suche und die der Einzeldarstellung einer Fortbildung auf [https://lfbo.kultus-bw.de/lfb](https://lfbo.kultus-bw.de/lfb); umgangsprachlich auch LFB genannt.
