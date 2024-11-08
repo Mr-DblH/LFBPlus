@@ -4,7 +4,7 @@
 
 [![mastodon](https://img.shields.io/badge/@MrDoubleH-1DA1F2?style=flat&logo=Mastodon&logoColor=white)](https://mastodon.social/@MrDblH)
 
-## Inhalt
+## Überblick
 Verbessert die Darstellung der Seiten zur Suche und die der Einzeldarstellung einer Fortbildung auf [https://lfbo.kultus-bw.de/lfb](https://lfbo.kultus-bw.de/lfb); umgangsprachlich auch LFB genannt.
 
 Hinweis: Das ist ein privates Projekt; ich stehe bzgl. dieses Projektes _nicht_ in Kontakt mit dem ZSL oder dem KM.
@@ -39,7 +39,8 @@ Hinweis: Das ist ein privates Projekt; ich stehe bzgl. dieses Projektes _nicht_ 
 ## Installationshinweise
 - für Firefox als Addon [hier](https://addons.mozilla.org/en-US/firefox/addon/lfb/) erhältlich; bitte ausschließlich von der offiziellen Mozilla-Addon-Seite laden.
 - für Chrome als Addon [hier](https://chrome.google.com/webstore/detail/lfb%2B/bfmkdejboikhkccmdpdaojchaeojgnam) erhältlich
-- als GreaseMonkey- oder TamperMonkey-Script: Dazu ist eines der folgenden Addons nötig, um das Script nutzen zu können: [Mozilla Firefox GM](https://addons.mozilla.org/de/firefox/addon/greasemonkey/), [Mozilla Firefox TM](https://addons.mozilla.org/de/firefox/addon/tampermonkey/?utm_source=addons.mozilla.org&utm_medium=referral&utm_content=search), [Google Chrome](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=de). Diese Addons helfen dabei, ein JavaScript lokal im Browser ausführen zu können. Das Script aus dem Unterordner von hier downloaden oder kopieren und entweder im Addon-Dialog importieren oder manuell über Copy&Paste via _neues Benutzerscript_ ergänzen (mMn einfachste Möglichkeit). Wichtig: auf diese Weise werden _keinerlei_ Updates geladen.
+- als GreaseMonkey- oder TamperMonkey-Script: Dazu ist eines der folgenden Addons nötig, um das Script nutzen zu können: [Mozilla Firefox GM](https://addons.mozilla.org/de/firefox/addon/greasemonkey/), [Mozilla Firefox TM](https://addons.mozilla.org/de/firefox/addon/tampermonkey/?utm_source=addons.mozilla.org&utm_medium=referral&utm_content=search), [Google Chrome](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=de). Diese Addons helfen dabei, ein JavaScript lokal im Browser ausführen zu können. Das Script aus dem Unterordner von hier downloaden oder kopieren und entweder im Addon-Dialog importieren oder manuell über Copy&Paste via _neues Benutzerscript_ ergänzen. Wichtig: auf diese Weise werden _keinerlei_ Updates geladen.
+- Das Projekt ist [hier](https://github.com/Mr-DblH/LFBPlus) auf github zu finden.
 
 ## Lizenz
 Creative Commons Attribution-NonCommercial 4.0 International [(CC BY-NC 4.0) ](https://creativecommons.org/licenses/by-nc/4.0/)
